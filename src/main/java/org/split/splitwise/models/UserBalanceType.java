@@ -1,11 +1,11 @@
 package org.split.splitwise.models;
 
-public enum BalanceType {
+public enum UserBalanceType {
     OWES,
     OWED;
 
-    public BalanceType getBalanceType(String type) {
-        for(BalanceType balanceType : BalanceType.values()){
+    public UserBalanceType getBalanceType(String type) {
+        for(UserBalanceType balanceType : UserBalanceType.values()){
             if(balanceType.name().equalsIgnoreCase(type)){
                 return balanceType;
             }

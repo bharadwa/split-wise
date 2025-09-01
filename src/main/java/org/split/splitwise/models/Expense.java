@@ -14,10 +14,10 @@ public class Expense extends BaseModel{
 
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<ExpenseDetail> expenseDetails;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Groups group;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User createdBy;
 
 }

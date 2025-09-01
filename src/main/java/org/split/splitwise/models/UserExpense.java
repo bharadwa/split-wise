@@ -7,8 +7,8 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@Entity(name="expense_detail")
-public class ExpenseDetail extends BaseModel {
+@Entity(name="user_expense_details")
+public class UserExpense extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
