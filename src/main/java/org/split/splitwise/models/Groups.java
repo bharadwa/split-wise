@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Entity(name="groups1")
+@Entity(name="user_groups")
 @Setter
 @Getter
 public class Groups extends BaseModel{
@@ -17,9 +17,16 @@ public class Groups extends BaseModel{
     private String description;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="users_groups")
+    @JoinTable(name="group_members",
+            joinColumns = @JoinColumn(name="group_id"),
+            inverseJoinColumns = @JoinColumn(name="user_id")
+    )
     private List<User> users;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "group")
     private List<Expense> expenses;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="admin_user_id")
+    private User adminUser;
 }
