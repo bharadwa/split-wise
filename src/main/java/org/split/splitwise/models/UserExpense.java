@@ -16,7 +16,7 @@ public class UserExpense extends BaseModel {
     private double amount;
 
     @Enumerated(EnumType.STRING)
-    private BalanceType balanceType;
+    private UserBalanceType balanceType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Expense expense;

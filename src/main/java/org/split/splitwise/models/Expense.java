@@ -1,9 +1,6 @@
 package org.split.splitwise.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -19,5 +16,8 @@ public class Expense extends BaseModel{
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
+
+    @Enumerated(EnumType.STRING)
+    private UserExpenseType expenseType;
 
 }

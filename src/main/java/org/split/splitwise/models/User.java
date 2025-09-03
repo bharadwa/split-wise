@@ -21,4 +21,7 @@ public class User extends BaseModel{
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy ="user")
     private List<Expense> expenses;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus userStatus;
 }
