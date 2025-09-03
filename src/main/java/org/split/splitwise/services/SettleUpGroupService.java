@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SettleUpGroupService {
 
-    List<Transaction> settleUpGroup(long group) throws GroupNotFoundException;
+    List<Transaction> settleUpGroup(long groupId) throws GroupNotFoundException;
 }
