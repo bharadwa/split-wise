@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Entity(name="groups")
+@Entity(name="groups1")
 @Setter
 @Getter
 public class Groups extends BaseModel{

@@ -19,7 +19,7 @@ public class User extends BaseModel{
 
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy ="user")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy ="createdBy")
     private List<Expense> expenses;
 
     @Enumerated(EnumType.STRING)

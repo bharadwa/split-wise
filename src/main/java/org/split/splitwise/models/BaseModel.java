@@ -20,11 +20,11 @@ public abstract class BaseModel {
     private long id;
 
     @CreatedDate
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private Date createAt;
 
     @CreatedBy
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private Date updateAt;
 
 
