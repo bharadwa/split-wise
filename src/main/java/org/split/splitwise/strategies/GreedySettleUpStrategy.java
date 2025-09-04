@@ -7,7 +7,7 @@ import org.split.splitwise.models.UserExpenseType;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -17,13 +17,43 @@ public class GreedySettleUpStrategy implements  SettleUpStrategy{
     public List<Transaction> settleUpGroup(List<Expense> expenses) {
 
         //we can use two priority queues to store the users with max credit and max debit
-
         List<Expense> unPaidExpenses = expenses.stream().filter(expense -> expense.getExpenseType() == UserExpenseType.EXPENSE).toList();
-
         // from the list of unpaid expenses we can create a map of user to amount owed
+        List<UserExpense> unpaidUsers = unPaidExpenses.stream()
+                .flatMap(user -> user.getPaidByUsers().stream())
+                .collect(Collectors.toList());
+        List<UserExpense> paideUsers =unPaidExpenses.stream()
+                        .flatMap(user-> user.getPaidForUsers().stream())
+                        .collect(Collectors.toList());
+        Map<Long,UserExpense> unPaidExpenseMap=new HashMap<>();
+        unpaidUsers.stream().forEach(expense -> {
+            if(!unPaidExpenseMap.containsKey(expense.getUser().getId())) {
+                unPaidExpenseMap.put(expense.getUser().getId(), expense);
+            }else {
+                UserExpense userExpense=unPaidExpenseMap.get(expense.getUser().getId());
+                userExpense.setAmount(userExpense.getAmount()+expense.getAmount());
+                unPaidExpenseMap.put(expense.getUser().getId(),userExpense);
+            }
+        });
 
-        List<UserExpense> unpaidUsers= unPaidExpenses.stream().flatMap(user -> user.getPaidByUsers().stream()).collect(Collectors.groupingBy(user ->user.g));
-        List<UserExpense> paidUsers= unPaidExpenses.stream().flatMap(user -> user.getPaidForUsers().stream()).collect(Collectors.toList());
-        return List.of();
+        Map<Long,UserExpense> paidUserMap=new HashMap<>();
+        paideUsers.stream().forEach(expense -> {
+            if(!paidUserMap.containsKey(expense.getUser().getId())) {
+                paidUserMap.put(expense.getUser().getId(), expense);
+            }else {
+                paidUserMap.get(expense.getUser().getId()).setAmount(paidUserMap.get(expense.getUser().getId()).getAmount()+expense.getAmount());
+            }
+        });
+
+        PriorityQueue<UserExpense> unpaidExpenses=new PriorityQueue<>(Comparator.comparing(UserExpense::getAmount,Collections.reverseOrder()));
+        PriorityQueue<UserExpense> paidUsers=new PriorityQueue<>(Comparator.comparing(UserExpense::getAmount,Collections.reverseOrder()));
+        p
+        List<Transaction> unpaidTransactions=new ArrayList<>();
+        while(!unpaidExpenses.isEmpty()&&!paidUsers.isEmpty()){
+
+        }
+        return unpaidTransactions;
     }
+
+
 }
