@@ -2,6 +2,7 @@ package org.split.splitwise.command.users;
 
 import org.split.splitwise.command.CommandKeywords;
 import org.split.splitwise.command.ICommand;
+import org.split.splitwise.command.utils.CommandUtils;
 import org.split.splitwise.controllers.UserController;
 import org.split.splitwise.dtos.RegisterUserRequestDTO;
 import org.split.splitwise.dtos.RegisterUserResponseDTO;
@@ -24,7 +25,7 @@ public class RegisterUserCommand  implements ICommand {
 
     @Override
     public boolean matches(String command) {
-        List<String> words = Arrays.stream(command.split(" ")).toList();
+        List<String> words = CommandUtils.splitWords(command);
         boolean matches= words.get(0).equals(CommandKeywords.REGISTER)&&words.size()==5;
         if(!matches) {
             System.out.println("Invalid Command ,Usage:Register <name> <email> <phoneNumber> <password>");

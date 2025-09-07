@@ -19,7 +19,7 @@ public class Expense extends BaseModel{
     private Date expenseDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Groups group;
+    private Group group;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;

@@ -3,6 +3,7 @@ package org.split.splitwise.command.users;
 
 import org.split.splitwise.command.CommandKeywords;
 import org.split.splitwise.command.ICommand;
+import org.split.splitwise.command.utils.CommandUtils;
 import org.split.splitwise.controllers.UserController;
 import org.split.splitwise.dtos.ResponseStatus;
 import org.split.splitwise.dtos.UpdateProfileRequestDTO;
@@ -24,7 +25,7 @@ public class UpdateProfileCommand implements ICommand {
     }
     @Override
     public boolean matches(String command) {
-        List<String> words = Arrays.asList(command.split(","));
+        List<String> words = CommandUtils.splitWords(command);
         boolean matches =words.get(1).equalsIgnoreCase(CommandKeywords.UPDATE_PROFILE)&& words.size()==3;
         if(!matches){
             System.out.println("Invalid Command ,Usage:<User_id> UpdateProfile <password>");

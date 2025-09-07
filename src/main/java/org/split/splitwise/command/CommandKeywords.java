@@ -4,5 +4,7 @@ public interface CommandKeywords {
 
     String REGISTER="Register";
     String UPDATE_PROFILE="UpdateProfile";
-    String USER_GROUPS ="Groups";
+    String ADD_GROUPS ="AddGroup";
+    String ADD_MEMBERS_TO_GROUP ="AddMember";
+    String EXIT ="exit";
 }

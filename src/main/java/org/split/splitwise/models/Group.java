@@ -16,7 +16,7 @@ public class Group extends BaseModel{
 
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="group_members",
             joinColumns = @JoinColumn(name="group_id"),
             inverseJoinColumns = @JoinColumn(name="user_id")
@@ -26,7 +26,7 @@ public class Group extends BaseModel{
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "group")
     private List<Expense> expenses;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="admin_user_id")
     private User createBy;
 }

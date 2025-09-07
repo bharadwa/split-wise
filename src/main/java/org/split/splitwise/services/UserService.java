@@ -8,4 +8,6 @@ public interface UserService {
     public User registerUser(String name, String email, String phoneNumber, String password) throws UserAlreadyExistsException;
 
     User updateProfile(long userId, String password) throws UserNotFoundException;
+
+    User checkMemberExistsInGroup(long userId);
 }

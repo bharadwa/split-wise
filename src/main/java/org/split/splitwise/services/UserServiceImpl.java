@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,7 +29,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(String name, String email, String phoneNumber, String password) throws UserAlreadyExistsException {
-        if(this.userRepository.findByPhoneNumber(phoneNumber).isPresent()){
+
+        Optional<User> optionalUser = this.userRepository.findByPhoneNumber(phoneNumber);
+        if(optionalUser.isPresent()) {
+            if(optionalUser.get().getUserStatus()==UserStatus.INVITED){
+                User user=optionalUser.get();
+                user.setUserStatus(UserStatus.ACTIVE);
+                return this.userRepository.save(user);
+            }else
             throw new UserAlreadyExistsException("User already exists");
         }
         User user =new User();
@@ -46,5 +55,21 @@ public class UserServiceImpl implements UserService {
         User user =this.userRepository.findById(userId).orElseThrow( () -> new UserNotFoundException("User not found"));
         user.setPassword(bCryptPasswordEncoder.encode(password));
         return userRepository.save(user);
+    }
+
+    @Override
+    public User checkMemberExistsInGroup(long userId) {
+        Optional<User> user=this.userRepository.findById(userId);
+        if(user.isEmpty()){
+            User user1=new User();
+            user1.setUserStatus(UserStatus.INVITED);
+            user1.setUpdateAt(new Date());
+            user1.setCreateAt(new Date());
+            user1.setPhoneNumber("8074220409");
+            user1.setName("RadomUser"+ UUID.randomUUID().toString());
+            user1.setEmail("RadomUser"+ UUID.randomUUID().toString()+"@gmail.com");
+            return userRepository.save(user1);
+        }
+        return user.get();
     }
 }
