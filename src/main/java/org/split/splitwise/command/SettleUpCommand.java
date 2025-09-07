@@ -2,6 +2,7 @@ package org.split.splitwise.command;
 
 import lombok.AllArgsConstructor;
 import org.split.splitwise.controllers.SettleUpController;
+import org.split.splitwise.dtos.ResponseStatus;
 import org.split.splitwise.dtos.SettleUpGroupRequestDTO;
 import org.split.splitwise.dtos.SettleUpGroupResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class SettleUpCommand  implements ICommand{
         SettleUpGroupRequestDTO requestDTO=new SettleUpGroupRequestDTO();
         requestDTO.setGroupId(Long.parseLong(words[1]));
         SettleUpGroupResponseDTO response =this.settleUpController.settleGroup(requestDTO);
-        System.out.println(response.getResponseStatus());
+        if(response!=null){
+            if(response.getResponseStatus()== ResponseStatus.SUCCESS) {
+
+            }
+        }
+
     }
 }

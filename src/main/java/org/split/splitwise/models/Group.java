@@ -9,7 +9,7 @@ import java.util.List;
 @Entity(name="user_groups")
 @Setter
 @Getter
-public class Groups extends BaseModel{
+public class Group extends BaseModel{
 
 
     private String name;
@@ -21,12 +21,12 @@ public class Groups extends BaseModel{
             joinColumns = @JoinColumn(name="group_id"),
             inverseJoinColumns = @JoinColumn(name="user_id")
     )
-    private List<User> users;
+    private List<User> groupMembers;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "group")
     private List<Expense> expenses;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="admin_user_id")
-    private User adminUser;
+    private User createBy;
 }

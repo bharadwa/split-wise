@@ -1,5 +1,8 @@
 package org.split.splitwise.command;
 
+import org.split.splitwise.command.users.RegisterUserCommand;
+import org.split.splitwise.command.users.UpdateProfileCommand;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,9 +12,13 @@ import java.util.List;
 public class CommandRegistry {
 
     private List<ICommand> commands;
-    public CommandRegistry(RegisterUserCommand command) {
+
+    @Autowired
+    public CommandRegistry(RegisterUserCommand registerUserCommand,
+                           UpdateProfileCommand updateProfileCommand) {
         commands = new ArrayList<ICommand>();
-        commands.add(command);
+        commands.add(registerUserCommand);
+        commands.add(updateProfileCommand);
     }
 
     public void addCommand(ICommand command) {

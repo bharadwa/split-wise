@@ -1,7 +1,8 @@
 package org.split.splitwise.strategies;
 
 import org.split.splitwise.models.Expense;
-import org.split.splitwise.models.Transaction;
+import org.split.splitwise.models.ExpenseType;
+import org.split.splitwise.services.dto.Transaction;
 import org.split.splitwise.models.UserExpense;
 import org.split.splitwise.models.UserExpenseType;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +18,7 @@ public class GreedySettleUpStrategy implements  SettleUpStrategy{
     public List<Transaction> settleUpGroup(List<Expense> expenses) {
 
         //we can use two priority queues to store the users with max credit and max debit
-        List<Expense> unPaidExpenses = expenses.stream().filter(expense -> expense.getExpenseType() == UserExpenseType.EXPENSE).toList();
+        List<Expense> unPaidExpenses = expenses.stream().filter(expense -> expense.getExpenseType() == ExpenseType.EXPENSE).toList();
         // from the list of unpaid expenses we can create a map of user to amount owed
         List<UserExpense> unpaidUsers = unPaidExpenses.stream()
                 .flatMap(user -> user.getPaidByUsers().stream())
@@ -47,7 +48,7 @@ public class GreedySettleUpStrategy implements  SettleUpStrategy{
 
         PriorityQueue<UserExpense> unpaidExpenses=new PriorityQueue<>(Comparator.comparing(UserExpense::getAmount,Collections.reverseOrder()));
         PriorityQueue<UserExpense> paidUsers=new PriorityQueue<>(Comparator.comparing(UserExpense::getAmount,Collections.reverseOrder()));
-        p
+
         List<Transaction> unpaidTransactions=new ArrayList<>();
         while(!unpaidExpenses.isEmpty()&&!paidUsers.isEmpty()){
 

@@ -1,6 +1,7 @@
 package org.split.splitwise.services;
 
 import org.split.splitwise.exceptions.UserAlreadyExistsException;
+import org.split.splitwise.exceptions.UserNotFoundException;
 import org.split.splitwise.models.User;
 import org.split.splitwise.models.UserStatus;
 import org.split.splitwise.repositories.UserRepository;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(String name, String email, String phoneNumber, String password) throws UserAlreadyExistsException {
-        if(this.userRepository.findByEmail(email).isPresent()){
+        if(this.userRepository.findByPhoneNumber(phoneNumber).isPresent()){
             throw new UserAlreadyExistsException("User already exists");
         }
         User user =new User();
@@ -37,6 +38,13 @@ public class UserServiceImpl implements UserService {
         user.setCreateAt(new Date());
         user.setUpdateAt(new Date());
         user.setUserStatus(UserStatus.ACTIVE);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateProfile(long userId, String password) throws UserNotFoundException {
+        User user =this.userRepository.findById(userId).orElseThrow( () -> new UserNotFoundException("User not found"));
+        user.setPassword(bCryptPasswordEncoder.encode(password));
         return userRepository.save(user);
     }
 }

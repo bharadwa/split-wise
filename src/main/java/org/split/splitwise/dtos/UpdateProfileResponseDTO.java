@@ -3,13 +3,10 @@ package org.split.splitwise.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
-
-import java.io.Serializable;
-
-@Setter
 @Getter
-public class RegisterUserResponseDTO extends  BaseResponseDTO {
+@Setter
+public class UpdateProfileResponseDTO extends BaseResponseDTO {
     private String email;
     private String name;
-    private long userId;
+    private String userId;
 }

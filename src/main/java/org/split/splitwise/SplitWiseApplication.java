@@ -17,6 +17,7 @@ public class SplitWiseApplication implements CommandLineRunner {
 
     private final Scanner sc;
     private final CommandRegistry commandRegistry;
+
     @Autowired
     public SplitWiseApplication(CommandRegistry commandRegistry) {
         sc=new Scanner(System.in);

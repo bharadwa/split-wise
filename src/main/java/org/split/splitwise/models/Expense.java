@@ -25,7 +25,7 @@ public class Expense extends BaseModel{
     private User createdBy;
 
     @Enumerated(EnumType.STRING)
-    private UserExpenseType expenseType;
+    private ExpenseType expenseType;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "expense")
     private List<UserExpense> paidByUsers;

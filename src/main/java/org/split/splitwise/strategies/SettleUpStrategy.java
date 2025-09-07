@@ -1,7 +1,7 @@
 package org.split.splitwise.strategies;
 
 import org.split.splitwise.models.Expense;
-import org.split.splitwise.models.Transaction;
+import org.split.splitwise.services.dto.Transaction;
 
 import java.util.List;
 

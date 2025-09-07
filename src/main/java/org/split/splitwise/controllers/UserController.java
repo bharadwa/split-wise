@@ -1,9 +1,8 @@
 package org.split.splitwise.controllers;
 
-import org.split.splitwise.dtos.RegisterUserRequestDTO;
-import org.split.splitwise.dtos.RegisterUserResponseDTO;
-import org.split.splitwise.dtos.ResponseStatus;
+import org.split.splitwise.dtos.*;
 import org.split.splitwise.exceptions.UserAlreadyExistsException;
+import org.split.splitwise.exceptions.UserNotFoundException;
 import org.split.splitwise.models.User;
 import org.split.splitwise.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,20 @@ public class UserController {
           response.setResponseStatus(ResponseStatus.SUCCESS);
         } catch (UserAlreadyExistsException e) {
             response.setResponseStatus(ResponseStatus.FAILURE);
+            response.setResponseMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    public UpdateProfileResponseDTO updateProfile(UpdateProfileRequestDTO updateProfileRequestDTO){
+
+        UpdateProfileResponseDTO response =new UpdateProfileResponseDTO();
+        try {
+            User user =this.userService.updateProfile(updateProfileRequestDTO.getUserId(),updateProfileRequestDTO.getPassword());
+            response.setResponseStatus(ResponseStatus.SUCCESS);
+        } catch (UserNotFoundException e) {
+            response.setResponseStatus(ResponseStatus.FAILURE);
+            response.setResponseMessage(e.getMessage());
         }
         return response;
     }

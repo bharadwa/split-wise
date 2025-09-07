@@ -3,7 +3,7 @@ package org.split.splitwise.services;
 import org.split.splitwise.exceptions.GroupNotFoundException;
 import org.split.splitwise.models.Expense;
 import org.split.splitwise.models.Groups;
-import org.split.splitwise.models.Transaction;
+import org.split.splitwise.services.dto.Transaction;
 import org.split.splitwise.repositories.ExpenseRepository;
 import org.split.splitwise.repositories.GroupRepository;
 import org.split.splitwise.repositories.UserExpenseRepository;
