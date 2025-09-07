@@ -1,6 +1,6 @@
-package org.split.splitwise.command;
+package org.split.splitwise.command.expenses;
 
-import lombok.AllArgsConstructor;
+import org.split.splitwise.command.ICommand;
 import org.split.splitwise.controllers.SettleUpController;
 import org.split.splitwise.dtos.ResponseStatus;
 import org.split.splitwise.dtos.SettleUpGroupRequestDTO;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SettleUpCommand  implements ICommand{
+public class SettleUpCommand  implements ICommand {
 
     private final SettleUpController settleUpController;
 

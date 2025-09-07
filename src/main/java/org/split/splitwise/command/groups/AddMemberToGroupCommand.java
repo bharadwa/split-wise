@@ -13,11 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class AddMemberToGroup implements ICommand {
+public class AddMemberToGroupCommand implements ICommand {
 
     private final GroupController groupController;
 
-    public AddMemberToGroup(GroupController  groupController) {
+    public AddMemberToGroupCommand(GroupController  groupController) {
         this.groupController = groupController;
     }
 
