@@ -1,8 +1,10 @@
 package org.split.splitwise.dtos;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.util.Pair;
+import org.split.splitwise.dtos.SplitType;
+import org.split.splitwise.dtos.Pair;
 
 import java.util.List;
 
@@ -12,12 +14,18 @@ public class AddExpenseRequestDTO {
 
     private long createdUserId;
 
-    private long expenseId;
+    private SplitType splitType;
+
+    private List<Long> users;
+
+    //who paid the amount
+    private List<Pair<Long,Integer>> paidUsers;
+
+    private List<Integer> splitValues;
 
     private long groupId;
 
-    private List<Pair> whoPaid;
+    private String description;
 
-    private List<Pair> whoHasToPay;
 
 }
