@@ -1,0 +1,94 @@
+@startuml
+
+class User {
+attributes :
+- user_id    : long
+- name       : String
+- phoneNumber: String
+- password   : String
+- userStatus  : UserStatus
+- expenses   : List<Expense>
+}
+' Composition
+User *-- Expense :expenses
+' Dependent
+User ..> UserStatus :uses
+
+enum UserStatus {
+   ACTIVE,
+   INVITED;
+}
+
+enum ExpenseType {
+   EXPENSE,
+   TRANSACTION;
+}
+
+class Expense {
+ attributes :
+ - id :long
+ - description : String
+ - amount      : double
+ - whoPaid     : List<UserExpense>
+ - whoHasToPay : List<UserExpense>
+ - group       : Group
+ - expenseType :ExpenseType
+}
+' Composition
+Expense *-- UserExpense :whoPaid
+Expense *-- UserExpense :whoHasToPay
+
+Expense ..> ExpenseType :uses
+' Association
+Expense --> Group :group
+
+class Group {
+ attributes :
+ - id  :long
+ - description :String
+ - name :String
+ - users : List<User>
+ - created_by :User
+ - expenses   :List<Expense>
+}
+' Aggregation
+Group o-- User :users
+Group o-- User :created_by
+' Aggregation
+Group o-- Expense
+
+enum UserExpenseType {
+  OWES,
+  OWNED
+}
+
+class UserExpense {
+  attributes :
+  - id  :long
+  - user :User
+  - expense : Expense
+  - amount  :double
+  - userExpenseType : UserExpenseType
+}
+' Association
+UserExpense -->User
+' Dependent
+UserExpense ..> UserExpenseType : uses
+
+
+interface SettleUpStrategy {
++ settleUpGroup(expenses : List<Expense>) : List<Transaction>
+}
+
+class BruteForSettleUpStrategy implements SettleUpStrategy{
+ + settleUpGroup(expenses : List<Expense>) : List<Transaction>
+}
+
+class TwoBucketSettleUpStrategy implements SettleUpStrategy{
+ + settleUpGroup(expenses : List<Expense>) : List<Transaction>
+}
+' Inheritance
+BruteForSettleUpStrategy ..|> SettleUpStrategy
+TwoBucketSettleUpStrategy ..|> SettleUpStrategy
+
+@enduml
