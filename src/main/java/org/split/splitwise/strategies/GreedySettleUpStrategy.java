@@ -46,12 +46,14 @@ public class GreedySettleUpStrategy implements SettleUpStrategy {
         });
 
 
+        //max heap
         PriorityQueue<Pair<User, Integer>> whoPaid = new PriorityQueue<>(
                 Comparator.comparing(Pair::getSecond, Collections.reverseOrder())
         );
+
+        //min heap
         PriorityQueue<Pair<User, Integer>> whoHasToPay = new PriorityQueue<>(
                 Comparator.comparingInt((Pair<User, Integer> pair) -> Math.abs(pair.getSecond()))
-                        .reversed()
         );
 
         for (Map.Entry<User, Integer> expense : paidExpenses.entrySet()) {
