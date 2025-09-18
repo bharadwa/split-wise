@@ -13,7 +13,7 @@ public class UserExpense extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    private double amount;
+    private int amount;
 
     @Enumerated(EnumType.STRING)
     private UserExpenseType userExpenseType;

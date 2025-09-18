@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SettleUpStrategy {
 
-    public List<Transaction> settleUpGroup(List<Expense> expenses);
+    public List<Transaction> settleUpExpenses(List<Expense> expenses);
 }

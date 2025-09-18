@@ -12,7 +12,7 @@ import java.util.List;
 public class RandomSettleUpStrategy implements SettleUpStrategy {
 
     @Override
-    public List<Transaction> settleUpGroup(List<Expense> expenses) {
+    public List<Transaction> settleUpExpenses(List<Expense> expenses) {
         return List.of();
     }
 }

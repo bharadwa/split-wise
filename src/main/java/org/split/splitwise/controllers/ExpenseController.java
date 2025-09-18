@@ -21,7 +21,7 @@ public class ExpenseController {
         this.expenseService = expenseService;
     }
 
-    public AddExpenseResponseDTO addExpense(AddExpenseRequestDTO addExpenseRequestDTO) {
+    /*public AddExpenseResponseDTO addExpense(AddExpenseRequestDTO addExpenseRequestDTO) {
         AddExpenseResponseDTO responseDTO = new AddExpenseResponseDTO();
 
         try {
@@ -36,5 +36,7 @@ public class ExpenseController {
 
         return responseDTO;
 
-    }
+    }*/
+
+
 }
