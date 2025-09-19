@@ -53,7 +53,7 @@ public class GreedySettleUpStrategy implements SettleUpStrategy {
 
         //min heap
         PriorityQueue<Pair<User, Integer>> whoHasToPay = new PriorityQueue<>(
-                Comparator.comparingInt((Pair<User, Integer> pair) -> Math.abs(pair.getSecond()))
+                Comparator.comparingInt(pair -> Math.abs(pair.getSecond()))
         );
 
         for (Map.Entry<User, Integer> expense : paidExpenses.entrySet()) {
@@ -87,6 +87,7 @@ public class GreedySettleUpStrategy implements SettleUpStrategy {
                 }
 
             }
+            transaction.setSettleUpAmount(Math.abs(amount));
             transactions.add(transaction);
         }
         return transactions;
